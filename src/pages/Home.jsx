@@ -44,6 +44,11 @@ export default function Home() {
 		document.body.classList.toggle('accent-default', accent === 'default');
 	}, [accent]);
 
+	const handleStart = useCallback(() => {
+		initAudio();
+		start();
+	}, [start]);
+
 	useEffect(() => {
 		const onKey = (e) => {
 			if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
@@ -64,10 +69,6 @@ export default function Home() {
 		return () => window.removeEventListener('keydown', onKey);
 	}, [isRunning, pause, reset, switchPhase, phase, handleStart]);
 
-	const handleStart = useCallback(() => {
-		initAudio();
-		start();
-	}, [start]);
 
 	const toggleFocus = async () => {
 		setFocus((f) => !f);
